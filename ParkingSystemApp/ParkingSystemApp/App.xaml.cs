@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using ParkingSystemApp.Authentication;
 using ParkingSystemApp.AuthenticationService;
 using ParkingSystemApp.AuthenticationService.Models;
@@ -22,15 +23,16 @@ namespace ParkingSystemApp
         {
             var services = new ServiceCollection();
 
+            // Add logging to the service collection
+            services.AddLogging(configure => configure.AddConsole());
+
             // Register services
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IAuthService, AuthService>();
-
-            _serviceProvider = services.BuildServiceProvider();
-
+            
             // Register the ViewModel and View
             services.AddSingleton<LoginViewModel>();
-            services.AddSingleton<LoginView>();
+            services.AddTransient<LoginView>();
 
             _serviceProvider = services.BuildServiceProvider();
 

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ParkingSystemApp.Authentication"
+        xmlns:local="clr-namespace:ParkingSystemApp.Authentication" d:DataContext="{d:DesignInstance Type=local:LoginViewModel}"
         mc:Ignorable="d"
         Title="LoginView" Height="450" Width="800">
     <Grid>
@@ -14,7 +14,7 @@
 
         <!-- Left Side: Login Form -->
         <Grid Background="White" Margin="0,0,300,0">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="330">
                 <!-- Header -->
                 <TextBlock Text="Parking Management System" 
                            FontSize="24" FontWeight="Bold" 
@@ -24,20 +24,19 @@
                 <!-- Username Field -->
                 <StackPanel Margin="0,0,0,10">
                     <TextBlock Text="Username" FontWeight="SemiBold" Foreground="#00274D"/>
-                    <TextBox Name="UsernameTextBox" Height="30" Background="#F5F5F5" BorderBrush="#DADADA"/>
+                    <TextBox Name="UsernameTextBox" Height="30" Background="#F5F5F5" BorderBrush="#DADADA" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
                 <!-- Password Field -->
                 <StackPanel Margin="0,0,0,20">
                     <TextBlock Text="Password" FontWeight="SemiBold" Foreground="#00274D"/>
-                    <PasswordBox Name="PasswordBox" Height="30" Background="#F5F5F5" BorderBrush="#DADADA"/>
+                    <PasswordBox Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged" Height="30" Background="#F5F5F5" BorderBrush="#DADADA" />
                 </StackPanel>
 
                 <!-- Sign In Button -->
-                <Button Content="Sign In" Width="150" Height="40" 
-                        Background="#00274D" Foreground="White" 
-                        FontWeight="Bold" BorderBrush="#00274D" 
-                        HorizontalAlignment="Center" Click="SignInButton_Click"/>
+                <Button Content="Sign In" Width="150" Height="40"
+                        IsEnabled="{Binding CanLogin}" Background="#00274D" Foreground="White"
+                        FontWeight="Bold" BorderBrush="#00274D" HorizontalAlignment="Center" Command="{Binding SignInCommand}"/> 
             </StackPanel>
         </Grid>
     </Grid>

@@ -13,15 +13,17 @@ namespace ParkingSystemApp.AuthenticationService.Models
     {
         private List<User> _users;
         private readonly ILogger<UserRepository> _logger;
+        private string configFilePath = "Authentication/UserConfig.json";
 
-        public UserRepository(string configFilePath, ILogger<UserRepository> logger)
+
+        public UserRepository(ILogger<UserRepository> logger)
         {
             _logger = logger;
+            LoadUsers();
             _logger.LogInformation("UserRepository initialized.");
-            LoadUsers(configFilePath);
         }
 
-        private void LoadUsers(string configFilePath)
+        private void LoadUsers()
         {
             if (File.Exists(configFilePath))
             {

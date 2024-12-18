@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParkingSystemApp.AuthenticationService.Models
 {
-    interface IAuthService
+    public interface IAuthService
     {
         public bool Authenticate(string username, string password);
     }
